@@ -2,6 +2,7 @@
   "name": "sesi-7--api-automation",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
@@ -12,10 +13,11 @@
   "license": "ISC",
   "devDependencies": {
     "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "chai": "^4.3.7",
     "mocha": "^11.7.5",
     "mochawesome": "^7.1.4",
-    "node-fetch": "^2.7.0",
-    "nock": "^13.3.0"
+    "nock": "^13.3.0",
+    "node-fetch": "^3.3.2"
   }
 }

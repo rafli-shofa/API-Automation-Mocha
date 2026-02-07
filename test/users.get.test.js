@@ -1,6 +1,9 @@
-const fetch = require("node-fetch");
-const { expect } = require("chai");
-const nock = require('nock');
+import fetch from 'node-fetch';
+import { expect } from 'chai';
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
+import { schema_createnewuser } from '../schema/reqresSchema.js';
+import nock from 'nock';
 
 describe("GET Users API", () => {
   before(() => {
@@ -43,5 +46,12 @@ describe("GET Users API", () => {
 
     // Assertion Response Body
     expect(result.data).to.be.an("array");
+
+    // Schema validation using Ajv
+    const ajv = new Ajv();
+    addFormats(ajv);
+    const validate = ajv.compile(schema_createnewuser);
+    const valid = validate(result);
+    expect(valid, 'Ajv validation errors: ' + JSON.stringify(validate.errors)).to.equal(true);
   });
 });
