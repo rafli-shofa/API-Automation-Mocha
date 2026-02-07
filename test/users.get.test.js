@@ -55,3 +55,4 @@ describe("GET Users API", () => {
     expect(valid, 'Ajv validation errors: ' + JSON.stringify(validate.errors)).to.equal(true);
   });
 });
+

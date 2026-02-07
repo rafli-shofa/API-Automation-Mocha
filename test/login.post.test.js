@@ -52,3 +52,4 @@ describe("POST Login API", () => {
     expect(valid, 'Ajv validation errors: ' + JSON.stringify(validate.errors)).to.equal(true);
   });
 });
+
