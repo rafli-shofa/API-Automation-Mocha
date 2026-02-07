@@ -1,6 +1,17 @@
+# API Automation using Mocha
+
+# Dependencies
 node_modules/
+
+# Reports
 report/
+
+# IDE
 /.idea/
 .vscode/
+
+# Logs
 npm-debug.log
+
+# Lockfiles
 package-lock.json
