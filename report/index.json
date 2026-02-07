@@ -1,0 +1,142 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-02-07T02:42:27.403Z",
+    "end": "2026-02-07T02:42:28.240Z",
+    "duration": 837,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e54651cf-1bee-436c-9465-436383b32bda",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a281654b-3547-4eb5-891c-566305d89e52",
+          "title": "POST Login API",
+          "fullFile": "D:\\Muh Rafli Shofa _ Tugas Project Mini Bootcamp QA Engineer Digital Skola\\Sesi 7 _ API Automation\\test\\login.post.test.js",
+          "file": "\\test\\login.post.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should login successfully",
+              "fullTitle": "POST Login API Should login successfully",
+              "timedOut": false,
+              "duration": 535,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await fetch(\"https://belajar-bareng.onrender.com/api/login\", {\n  method: \"POST\",\n  headers: { \"Content-Type\": \"application/json\" },\n  body: JSON.stringify({\n    email: \"admin@mail.com\",\n    password: \"123456\"\n  })\n});\nconst body = await response.json();\nif (response.status === 200) {\n  expect(body).to.have.property(\"token\");\n  const ajv = new Ajv();\n  const validate = ajv.compile(schema);\n  const valid = validate(body);\n  expect(valid).to.equal(true);\n} else {\n  expect(response.status).to.be.oneOf([400, 401]);\n  expect(body).to.have.property(\"message\");\n}",
+              "err": {},
+              "uuid": "45584292-e9b1-457b-9459-2f8006d36abb",
+              "parentUUID": "a281654b-3547-4eb5-891c-566305d89e52",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "45584292-e9b1-457b-9459-2f8006d36abb"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 535,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "13db1d20-2a15-42e0-bd69-b108fb3a30ea",
+          "title": "GET Users API",
+          "fullFile": "D:\\Muh Rafli Shofa _ Tugas Project Mini Bootcamp QA Engineer Digital Skola\\Sesi 7 _ API Automation\\test\\users.get.test.js",
+          "file": "\\test\\users.get.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should return list of users",
+              "fullTitle": "GET Users API Should return list of users",
+              "timedOut": false,
+              "duration": 290,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await fetch(\"https://belajar-bareng.onrender.com/api/users\");\nconst body = await response.json();\nif (response.status === 200) {\n  expect(body).to.be.an(\"array\");\n  const ajv = new Ajv();\n  const validate = ajv.compile(schema);\n  const valid = validate(body);\n  expect(valid).to.equal(true);\n} else {\n  expect(response.status).to.equal(401);\n  expect(body).to.have.property(\"message\");\n}",
+              "err": {},
+              "uuid": "c5cc29c0-f0f7-4831-b7b3-27dd563cdce1",
+              "parentUUID": "13db1d20-2a15-42e0-bd69-b108fb3a30ea",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c5cc29c0-f0f7-4831-b7b3-27dd563cdce1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 290,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.5"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "index",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "report",
+        "reportFilename": "index"
+      },
+      "version": "6.3.2"
+    }
+  }
+}
