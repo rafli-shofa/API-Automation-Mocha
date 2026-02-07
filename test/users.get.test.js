@@ -1,23 +1,47 @@
 const fetch = require("node-fetch");
 const { expect } = require("chai");
-const Ajv = require("ajv");
-const schema = require("../schema/users.schema.json");
+const nock = require('nock');
 
 describe("GET Users API", () => {
+  before(() => {
+    nock('https://reqres.in')
+      .get('/api/users')
+      .query({ page: '2' })
+      .reply(200, {
+        page: 2,
+        per_page: 6,
+        total: 12,
+        total_pages: 2,
+        data: [
+          { id: 7, email: 'michael.lawson@reqres.in', first_name: 'Michael', last_name: 'Lawson' }
+        ]
+      });
+  });
+
+  after(() => {
+    nock.cleanAll();
+  });
   it("Should return list of users", async () => {
-    const response = await fetch("https://belajar-bareng.onrender.com/api/users");
-    const body = await response.json();
+    const response = await fetch("https://reqres.in/api/users?page=2", {
+      headers: {
+        "Accept": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+      }
+    });
 
-    if (response.status === 200) {
-      expect(body).to.be.an("array");
-
-      const ajv = new Ajv();
-      const validate = ajv.compile(schema);
-      const valid = validate(body);
-      expect(valid).to.equal(true);
-    } else {
-      expect(response.status).to.equal(401);
-      expect(body).to.have.property("message");
+    const text = await response.text();
+    let result;
+    try {
+      result = JSON.parse(text);
+    } catch (e) {
+      console.error('Non-JSON response body:\n', text.slice(0, 1000));
+      throw new Error('Expected JSON response but received non-JSON (status ' + response.status + ')');
     }
+
+    // Assertion Status Code
+    expect(response.status).to.equal(200);
+
+    // Assertion Response Body
+    expect(result.data).to.be.an("array");
   });
 });

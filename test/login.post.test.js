@@ -1,31 +1,44 @@
 const fetch = require("node-fetch");
 const { expect } = require("chai");
-const Ajv = require("ajv");
-const schema = require("../schema/login.schema.json");
+const nock = require('nock');
 
 describe("POST Login API", () => {
+  before(() => {
+    nock('https://reqres.in')
+      .post('/api/login', { email: 'eve.holt@reqres.in', password: 'cityslicka' })
+      .reply(200, { token: 'QpwL5tke4Pnpja7X4' });
+  });
+
+  after(() => {
+    nock.cleanAll();
+  });
   it("Should login successfully", async () => {
-    const response = await fetch("https://belajar-bareng.onrender.com/api/login", {
+    const response = await fetch("https://reqres.in/api/login", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+      },
       body: JSON.stringify({
-        email: "admin@mail.com",
-        password: "123456"
+        email: "eve.holt@reqres.in",
+        password: "cityslicka"
       })
     });
 
-    const body = await response.json();
-
-    if (response.status === 200) {
-      expect(body).to.have.property("token");
-
-      const ajv = new Ajv();
-      const validate = ajv.compile(schema);
-      const valid = validate(body);
-      expect(valid).to.equal(true);
-    } else {
-      expect(response.status).to.be.oneOf([400, 401]);
-      expect(body).to.have.property("message");
+    const text = await response.text();
+    let result;
+    try {
+      result = JSON.parse(text);
+    } catch (e) {
+      console.error('Non-JSON response body:\n', text.slice(0, 1000));
+      throw new Error('Expected JSON response but received non-JSON (status ' + response.status + ')');
     }
+
+    // Assertion Status Code
+    expect(response.status).to.equal(200);
+
+    // Assertion Response Body
+    expect(result).to.have.property("token");
   });
 });

@@ -12,9 +12,10 @@
   "license": "ISC",
   "devDependencies": {
     "ajv": "^8.17.1",
-    "chai": "^6.2.0",
+    "chai": "^4.3.7",
     "mocha": "^11.7.5",
     "mochawesome": "^7.1.4",
-    "node-fetch": "^2.7.0"
+    "node-fetch": "^2.7.0",
+    "nock": "^13.3.0"
   }
 }
