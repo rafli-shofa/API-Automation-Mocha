@@ -5,9 +5,9 @@
     "passes": 2,
     "pending": 0,
     "failures": 0,
-    "start": "2026-02-07T02:42:27.403Z",
-    "end": "2026-02-07T02:42:28.240Z",
-    "duration": 837,
+    "start": "2026-02-07T03:01:05.176Z",
+    "end": "2026-02-07T03:01:06.747Z",
+    "duration": 1571,
     "testsRegistered": 2,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "e54651cf-1bee-436c-9465-436383b32bda",
+      "uuid": "6b53cf47-844b-4fe6-b442-06657a42cf96",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "a281654b-3547-4eb5-891c-566305d89e52",
+          "uuid": "18e1ac9b-e035-4362-948a-0c3958498b5e",
           "title": "POST Login API",
           "fullFile": "D:\\Muh Rafli Shofa _ Tugas Project Mini Bootcamp QA Engineer Digital Skola\\Sesi 7 _ API Automation\\test\\login.post.test.js",
           "file": "\\test\\login.post.test.js",
@@ -38,7 +38,7 @@
               "title": "Should login successfully",
               "fullTitle": "POST Login API Should login successfully",
               "timedOut": false,
-              "duration": 535,
+              "duration": 1265,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -47,26 +47,26 @@
               "context": null,
               "code": "const response = await fetch(\"https://belajar-bareng.onrender.com/api/login\", {\n  method: \"POST\",\n  headers: { \"Content-Type\": \"application/json\" },\n  body: JSON.stringify({\n    email: \"admin@mail.com\",\n    password: \"123456\"\n  })\n});\nconst body = await response.json();\nif (response.status === 200) {\n  expect(body).to.have.property(\"token\");\n  const ajv = new Ajv();\n  const validate = ajv.compile(schema);\n  const valid = validate(body);\n  expect(valid).to.equal(true);\n} else {\n  expect(response.status).to.be.oneOf([400, 401]);\n  expect(body).to.have.property(\"message\");\n}",
               "err": {},
-              "uuid": "45584292-e9b1-457b-9459-2f8006d36abb",
-              "parentUUID": "a281654b-3547-4eb5-891c-566305d89e52",
+              "uuid": "96f57f5c-0aca-4de5-b865-59349f697312",
+              "parentUUID": "18e1ac9b-e035-4362-948a-0c3958498b5e",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "45584292-e9b1-457b-9459-2f8006d36abb"
+            "96f57f5c-0aca-4de5-b865-59349f697312"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 535,
+          "duration": 1265,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
         },
         {
-          "uuid": "13db1d20-2a15-42e0-bd69-b108fb3a30ea",
+          "uuid": "9dfa193d-70c0-4099-811a-e0f6f72721df",
           "title": "GET Users API",
           "fullFile": "D:\\Muh Rafli Shofa _ Tugas Project Mini Bootcamp QA Engineer Digital Skola\\Sesi 7 _ API Automation\\test\\users.get.test.js",
           "file": "\\test\\users.get.test.js",
@@ -77,7 +77,7 @@
               "title": "Should return list of users",
               "fullTitle": "GET Users API Should return list of users",
               "timedOut": false,
-              "duration": 290,
+              "duration": 294,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -86,20 +86,20 @@
               "context": null,
               "code": "const response = await fetch(\"https://belajar-bareng.onrender.com/api/users\");\nconst body = await response.json();\nif (response.status === 200) {\n  expect(body).to.be.an(\"array\");\n  const ajv = new Ajv();\n  const validate = ajv.compile(schema);\n  const valid = validate(body);\n  expect(valid).to.equal(true);\n} else {\n  expect(response.status).to.equal(401);\n  expect(body).to.have.property(\"message\");\n}",
               "err": {},
-              "uuid": "c5cc29c0-f0f7-4831-b7b3-27dd563cdce1",
-              "parentUUID": "13db1d20-2a15-42e0-bd69-b108fb3a30ea",
+              "uuid": "2114f77c-12e4-49e2-a1ca-b1e639c070d3",
+              "parentUUID": "9dfa193d-70c0-4099-811a-e0f6f72721df",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "c5cc29c0-f0f7-4831-b7b3-27dd563cdce1"
+            "2114f77c-12e4-49e2-a1ca-b1e639c070d3"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 290,
+          "duration": 294,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
